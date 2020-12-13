@@ -1,3 +1,10 @@
+CREATE DATABASE annotation;
+
+CREATE USER annotator WITH PASSWORD 'annotation';
+
+GRANT ALL PRIVILEGES ON DATABASE annotation TO annotator;
+
+
 CREATE TABLE batches(
     batch_ID VARCHAR(255) PRIMARY KEY,
     paragraph_IDs TEXT[]

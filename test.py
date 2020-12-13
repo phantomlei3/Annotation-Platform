@@ -19,6 +19,8 @@ if __name__ == '__main__':
     db=database()
     batch_id = "test"
 
+    insert_paragraphs_from_one_article(db)
+
     paragraphs_dict = db.get_all_paragraph_ids_in_dict()
     paragraphs = paragraphs_dict["https://vaxxter.com/vaccines-2020-big-pharmas-admissions-of-fraud/"]
 

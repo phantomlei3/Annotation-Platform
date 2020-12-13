@@ -10,7 +10,7 @@ class database:
     '''
 
     def __init__(self):
-        self.conn = psycopg2.connect("host='vcm-17659.vm.duke.edu' port='5432' dbname='annotation' user='annotator' password='duke'")
+        self.conn = psycopg2.connect("host='vcm-17906.vm.duke.edu' port='5432' dbname='annotation' user='annotator' password='annotation'")
         self.cursor = self.conn.cursor()
 
     def insert_new_paragraph(self, paragraph_id, article_url, paragraph_content):
