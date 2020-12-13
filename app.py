@@ -53,7 +53,8 @@ def annotation_page():
     # get request to create the page for annotation
     if request.method == "GET":
         ## TODO: TESTING
-        batch = Batch(session["batch_id"])
+        batch_id = session["batch_id"]
+        batch = Batch(batch_id)
         # Batch annotations are not finished
         if session["paragraph_id"] == "None":
             return "Finished"

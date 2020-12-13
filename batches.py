@@ -29,7 +29,7 @@ class Batch:
         '''
 
         index = self.paragraph_ids_list.index(previous_paragraph_id)
-        if index+1 == len(self.paragraph_ids_list):
+        if index+1 >= len(self.paragraph_ids_list):
             return None
         return self.paragraph_ids_list[index+1]
 

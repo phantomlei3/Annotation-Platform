@@ -1,5 +1,6 @@
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/static/css/styles.css">
 
@@ -8,14 +9,17 @@
 <script>
     function disable_checkboxes(){
         document.getElementById("all_checkboxes").style.display = "none";
+        $("input[type='submit']").prop("disabled", false);
     }
 
     function enable_checkboxes(){
         document.getElementById("all_checkboxes").style.display = "block";
+        $("input[type='submit']").prop("disabled", false);
     }
 
     function set_radio_to_yes(){
         document.getElementById("exists_true").checked = "true";
+        $("input[type='submit']").prop("disabled", false);
     }
 
     function select_parent(clicked_id){
@@ -121,7 +125,7 @@
                     <span class="checkbox-checkmark"></span>
                 </label>
             </div>
-            <input type="submit" value="Submit" class="button">
+            <input type="submit" disabled="disabled" value="Submit" class="button">
         </form>
 
 
