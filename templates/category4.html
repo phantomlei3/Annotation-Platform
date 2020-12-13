@@ -1,0 +1,132 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/static/css/styles.css">
+
+
+<!-- Scripts for the form-->
+<script>
+    function disable_checkboxes(){
+        document.getElementById("all_checkboxes").style.display = "none";
+    }
+
+    function enable_checkboxes(){
+        document.getElementById("all_checkboxes").style.display = "block";
+    }
+
+    function set_radio_to_yes(){
+        document.getElementById("exists_true").checked = "true";
+    }
+
+    function select_parent(clicked_id){
+        var parent = clicked_id.substring(0,7);
+
+        document.getElementById(parent).checked = "true";
+    }
+
+    function deselect_children(clicked_parent){
+        var parent_id = clicked_parent.id
+        if (!clicked_parent.checked){
+            var children = document.getElementsByName(parent_id);
+            for(var i=0; i < children.length; i++){
+                children[i].checked = false;
+            }
+        }
+    }
+
+
+</script>
+</head>
+
+
+<body>
+    
+
+<div class="split left">
+    <div class="centered">
+    <h3>Target Text:</h3>
+    <div class="target_paragraph">
+        {{paragraph}}
+    </div>
+    </div>
+</div>
+
+<div class="split right">
+    <div class="centered">
+        <button class="flag_button" onclick="window.location.href='/Users/rich/vax_misinfo/taxonomy-labeler/forms/category1.html'"><i class="fa fa-flag"></i> Flag target text</button>
+        
+        <!-- ACTUAL LABELING FORM -->
+        <form method="post">
+            <!-- Initial Yes or No question -->
+            <p class="question">Does the author raise reasons for <b>exemptions or ineligibility</b> of receiving the vaccine?</p>
+            <div class="radio-buttons">
+                <label class="radio-container">
+                    <input type="radio" name="exists" id="exists_true" value="Yes" onclick="enable_checkboxes()">Yes
+                    <span class="radio-checkmark"></span>
+                </label>
+                <label class="radio-container">
+                    <input type="radio" name="exists" value="No" onclick="disable_checkboxes()">No
+                    <span class="radio-checkmark"></span>
+                </label>
+            </div>
+        
+            <!-- Category labels -->
+            <p class="question">If yes, <b>which of the following topics/arguments</b> are mentioned:</p>
+            <div class="checkboxes" id="all_checkboxes">
+                <label class="checkbox-container">Religious or ethical beliefs 
+                    <input type="checkbox" name="category" id="label_1" value="label_1" onclick="set_radio_to_yes()">
+                    <span class="checkbox-checkmark"></span>
+                    <span class="description_text">Religious belief, ethical disagreement, or traditions that cause people to not want vaccines. For example: "vaccine production isn't vegan"</span>
+                </label>
+                <label class="checkbox-container">Individuals right to choose for themselves
+                    <input type="checkbox" name="category" id="label_2" value="label_2"  onclick="set_radio_to_yes()">
+                    <span class="checkbox-checkmark"></span>
+                    <span class="description_text">Arguments along the line of personal freedom, wanting to weigh the risk versus the benefits yourself, etc</span>
+                </label>
+                <label class="checkbox-container">Privacy and personal nature of the decision
+                    <input type="checkbox" name="category" id="label_3" value="label_3"  onclick="set_radio_to_yes()">
+                    <span class="checkbox-checkmark"></span>
+                    <span class="description_text">Arguments that one shouldn't have to share their vaccine history. Lack of impact on others due to the decision. "It doesn't concern others whether I vaccinate or not".</span>
+                </label>
+                <label class="checkbox-container">Ineligibility or exemptions for medical reasons
+                    <input type="checkbox" name="category" id="label_4" value="label_4" onclick="set_radio_to_yes();deselect_children(this);">
+                    <span class="checkbox-checkmark"></span>
+                    <span class="description_text">Claims that certain groups of people don't need to or shouldn't have to get a vaccine due to their demographic or current situation.</span>
+                </label>
+        
+                    <!-- Level 3 annotations. Name for each checkbox is set to ID of parent. -->
+                    <div class="child_checkboxes">
+                        <label class="checkbox-container">Being ill at the time
+                            <input type="checkbox" id="label_4_1" value="label_4_1" name="category" onclick="set_radio_to_yes();select_parent(this.id);">
+                            <span class="checkbox-checkmark"></span>
+                        </label>
+                        <label class="checkbox-container">Due to age
+                            <input type="checkbox" id="label_4_2" value="label_4_2" name="category" onclick="set_radio_to_yes();select_parent(this.id);">
+                            <span class="checkbox-checkmark"></span>
+                            <span class="description_text">Whether for being too old or too young (including babies).</span>
+                        </label>
+                        <label class="checkbox-container">Due to gender
+                            <input type="checkbox" id="label_4_3" value="label_4_3" name="category" onclick="set_radio_to_yes();select_parent(this.id);">
+                            <span class="checkbox-checkmark"></span>
+                            <span class="description_text">Whether that the vaccines just aren't relevant to you ("HPV vaccine is just for women"), or that they can actually be harmful to you.</span>
+                        </label>
+                        <label class="checkbox-container">Pregnant or breastfeeding women
+                            <input type="checkbox" id="label_4_4" value="label_4_4" name="category" onclick="set_radio_to_yes();select_parent(this.id);">
+                            <span class="checkbox-checkmark"></span>
+                        </label>
+                    </div>
+        
+                <label class="checkbox-container">Other (or not specified)
+                    <input type="checkbox" id="label_5" value="label_5" name="category" onclick="set_radio_to_yes()">
+                    <span class="checkbox-checkmark"></span>
+                </label>
+            </div>
+            <input type="submit" value="Submit" class="button">
+        </form>
+
+
+    </div>
+</div>
+        
+</body>
+</html> 
